@@ -9,6 +9,7 @@
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
     "apexcharts": "^3.35.0",
+    "axios": "^0.26.1",
     "framer-motion": "^6.3.0",
     "material-paper": "0.0.8",
     "material-table": "^2.0.3",
