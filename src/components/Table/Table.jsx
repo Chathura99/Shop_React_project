@@ -71,7 +71,7 @@
 import * as React from "react";
 import { useTable } from 'react-table'
 import "./Table.css";
-import { tableData } from "../../Data/Data";
+import { data1, tableData } from "../../Data/Data";
 
 const Table = () => {
     //change style by using status
@@ -120,9 +120,17 @@ const Table = () => {
         }
     ];
 
+
+
     return (
         <div>
-            <h3 style={{paddingTop:'2rem'}}>Recent Orders</h3>
+            {/* <div>
+                {data1.map((d) => {
+                    <p>{d.id},{d.product}</p>
+                })};
+            </div> */}
+
+            <h3 style={{ paddingTop: '2rem' }}>Recent Orders</h3>
 
             <table className="Table">
                 <thead>
