@@ -22,7 +22,8 @@ import img2 from "../imgs/img2.png";
 import img3 from "../imgs/img3.png";
 
 import axios from 'axios';
-const EMP_URL = "http://localhost:8880/api/v1/products";
+//springboot dummy port
+const EMP_URL = "http://localhost:8080/api/v1/products";
 // Sidebar Data
 export const SidebarData = [
   {
