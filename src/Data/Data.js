@@ -5,25 +5,17 @@ import {
   UilUsersAlt,
   UilPackage,
   UilChart,
-  UilSignOutAlt,
 } from "@iconscout/react-unicons";
 
 // Analytics Cards imports
-import {
-  UilUsdSquare,
-  UilMoneyWithdrawal
-} from "@iconscout/react-unicons";
-
-import { keyboard } from "@testing-library/user-event/dist/keyboard";
+import { UilUsdSquare, UilMoneyWithdrawal } from "@iconscout/react-unicons";
 
 // Recent Card Imports users
 import img1 from "../imgs/img1.png";
 import img2 from "../imgs/img2.png";
 import img3 from "../imgs/img3.png";
 
-import axios from 'axios';
-//springboot dummy port
-const EMP_URL = "http://localhost:8080/api/v1/products";
+
 // Sidebar Data
 export const SidebarData = [
   {
@@ -40,14 +32,13 @@ export const SidebarData = [
   },
   {
     icon: UilPackage,
-    heading: 'Products'
+    heading: "Products",
   },
   {
     icon: UilChart,
-    heading: 'Analytics'
+    heading: "Analytics",
   },
 ];
-
 
 // Recent Update Card Data
 export const UpdatesData = [
@@ -70,7 +61,6 @@ export const UpdatesData = [
     time: "2 hours ago",
   },
 ];
-
 
 // Analytics Cards Data for reusable components
 export const cardsData = [
@@ -127,46 +117,3 @@ export const cardsData = [
     ],
   },
 ];
-//table data
-export const tableData = [
-  {
-    col1: 'Lasania Chiken Fri',
-    col2: 18908424,
-    col3: '2 March 2022',
-    col4: 'Approved',
-    col5: 'Detail'
-  },
-  {
-    col1: 'Big Baza Bang ',
-    col2: 18908424,
-    col3: '2 March 2022',
-    col4: 'Pending',
-    col5: 'Detail'
-  },
-  {
-    col1: 'Cupcake',
-    col2: 18908424,
-    col3: '2 March 2022',
-    col4: 'Delivered',
-    col5: 'Detail'
-  },
-  {
-    col1: 'Lasania Chiken Fri',
-    col2: 18908424,
-    col3: '2 March 2022',
-    col4: 'Approved',
-    col5: 'Detail'
-  },
-];
-var data1;
-axios.get(EMP_URL).then(function (result) {
-  data1=result.data;
-  data1.map((d) => {
-  console.log(d.product,d.date,d.status)
-})
-});
-
-
-
-
-
