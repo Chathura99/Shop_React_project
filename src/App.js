@@ -1,7 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Routes, // instead of "Switch"
   Route,
 } from "react-router-dom";
@@ -12,18 +11,17 @@ import Orders from './components/Orders/Orders';
 import Customers from './components/Customers/customers';
 import Products from './components/Products/Products';
 
-
-
 function App() {
 
 
   return (
 
     <div className="App">
-      <div class="AppGlass">
+      <div className="AppGlass">
+        
+        
+        <BrowserRouter>
         <Sidebar />
-
-        <Router>
           <Routes>
             <Route exact path="/" element={<MainDash />}></Route>
             <Route path="/orders" element={<Orders />}></Route>
@@ -31,9 +29,10 @@ function App() {
             <Route path="/products" element={<Products />}></Route>
             <Route path="/analytics" element={<MainDash />}></Route>
           </Routes>
-        </Router>
+          <RightSide />
+        </BrowserRouter>
 
-        <RightSide />
+        
       </div>
     </div>
   );

@@ -6,47 +6,51 @@ import { SidebarData } from "../../Data/Data";
 import { UilSignOutAlt } from "@iconscout/react-unicons";
 import { UilBars } from "@iconscout/react-unicons";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-  
   const [selected, setSelected] = useState(0);
-  console.log(selected);
+  // console.log(selected);
 
-  const [expanded, setExpaned] = useState(true)
+  const [expanded, setExpaned] = useState(true);
 
   const sidebarVariants = {
     true: {
-      left: '0'
+      left: "0",
     },
     false: {
-      left: '-60%'
-    }
-  }
-  
-  //change view 
+      left: "-60%",
+    },
+  };
+
+  //change view
   function changeView(index) {
     if (index === 0) {
-      window.history.replaceState("", "", '/')
-    } else if (index === 1) { 
-      window.history.replaceState("", "", '/orders')
+      return "/";
+    } else if (index === 1) {
+      return "/orders";
     } else if (index === 2) {
-      window.history.replaceState("", "", '/customers')
+      return "/customers";
     } else if (index === 3) {
-      window.history.replaceState("", "", '/products')
+      return "/products";
     } else if (index === 4) {
-      window.history.replaceState("", "", '/')
+      return "/";
     }
-
   }
-  
+
   return (
     <>
-      <div className="bars" style={expanded ? { left: '60%' } : { left: '5%' }} onClick={() => setExpaned(!expanded)}>
+      <div
+        className="bars"
+        style={expanded ? { left: "60%" } : { left: "5%" }}
+        onClick={() => setExpaned(!expanded)}
+      >
         <UilBars />
       </div>
-      <motion.div className='sidebar'
+      <motion.div
+        className="sidebar"
         variants={sidebarVariants}
-        animate={window.innerWidth <= 768 ? `${expanded}` : ''}
+        animate={window.innerWidth <= 768 ? `${expanded}` : ""}
       >
         {/* logo */}
         <div className="logo">
@@ -60,15 +64,21 @@ const Sidebar = () => {
           {SidebarData.map((item, index) => {
             return (
               //   change look in selected
-              <div className={selected === index ? "menuItem active" : "menuItem"}
+              <div
+                className={selected === index ? "menuItem active" : "menuItem"}
                 key={index}
                 //set selected variable to index by using setSelected
                 //call multiple function by one Onclick
-                onClick={() => { setSelected(index); changeView(index) }}
-              >
 
-                <item.icon />
-                <span>{item.heading}</span>
+                onClick={() => {
+                  setSelected(index);
+                }}
+              >
+                {/* Navigate */}
+                <Link to={changeView(index)} style={{ all: "unset" }}>
+                  <item.icon />
+                  <span>{item.heading}</span>
+                </Link>
               </div>
             );
           })}
