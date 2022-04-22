@@ -12,7 +12,7 @@ import Chart from "react-apexcharts";
 // parent Card
 
 const Card = (props) => {
-    //props from Cards.jsx
+    //props from Cards.jsx(parameter)
     //expand data analytics cards
     const [expanded, setExpanded] = useState(false);
     return (

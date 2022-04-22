@@ -12,7 +12,7 @@ const Cards = () => {
                     <div className="parentContainer" key={id}>
                         {/* Reusable card */}
                         <Card
-                            //assign variables(props-used in card component)
+                            //assign variables(props(parameter)-used in card component)
                             title={card.title}
                             color={card.color}
                             barValue={card.barValue}

@@ -19,9 +19,6 @@
 //   createData("Cupcake", 18908421, "2 March 2022", "Delivered"),
 // ];
 
-
-
-
 // export default function BasicTable() {
 //   return (
 //       <div className="Table">
@@ -64,118 +61,123 @@
 //   );
 // }
 
-
-
-
-
 import * as React from "react";
-import { useTable } from 'react-table'
 import "./Table.css";
-import { data1, tableData } from "../../Data/Data";
+import ProductService from "../../services/ProductService";
+import { useState, useEffect } from "react";
 
 const Table = () => {
-    //change style by using status
-    const makeStyle = (status) => {
-        if (status === 'Approved') {
-            return {
-                background: 'rgb(145 254 159 / 47%)',
-                color: 'green',
-            }
-        }
-        else if (status === 'Pending') {
-            return {
-                background: '#ffadad8f',
-                color: 'red',
-            }
-        }
-        else {
-            return {
-                background: '#59bfff',
-                color: 'white',
-            }
-        }
+
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    getProducts()
+  }, [])
+
+  const getProducts=() => {
+    ProductService.getProducts().then((res) => {
+        // set variable list
+        setProducts(res.data);
+      });
+  };
+
+  //change style by using status
+  const makeStyle = (status) => {
+    if (status === "Approved") {
+      return {
+        background: "rgb(145 254 159 / 47%)",
+        color: "green",
+      };
+    } else if (status === "Pending") {
+      return {
+        background: "#ffadad8f",
+        color: "red",
+      };
+    } else {
+      return {
+        background: "#59bfff",
+        color: "white",
+      };
     }
+  };
 
-    //reusable col names
-    const columns = [
-        {
-            Header: 'Product',
-            accessor: 'col1',
-        },
-        {
-            Header: 'Tracking ID',
-            accessor: 'col2',
-        },
-        {
-            Header: 'Date',
-            accessor: 'col3',
-        },
-        {
-            Header: 'Status',
-            accessor: 'col4',
-        },
-        {
-            Header: '',
-            accessor: 'col5',
-        }
-    ];
+  //reusable col names
+  const columns = [
+    {
+      Header: "Product",
+      accessor: "col1",
+    },
+    {
+      Header: "Tracking ID",
+      accessor: "col2",
+    },
+    {
+      Header: "Date",
+      accessor: "col3",
+    },
+    {
+      Header: "Status",
+      accessor: "col4",
+    },
+    {
+      Header: "Details",
+      accessor: "col5",
+    },
+  ];
 
-
-
-    return (
-        <div>
-            {/* <div>
+  return (
+    <div>
+      {/* <div>
                 {data1.map((d) => {
                     <p>{d.id},{d.product}</p>
                 })};
             </div> */}
 
-            <h3 style={{ paddingTop: '2rem' }}>Recent Orders</h3>
+      <h3 style={{ paddingTop: "2rem" }}>Recent Orders</h3>
 
-            <table className="Table">
-                <thead>
-                    <tr>
-                        {/* get data from this */}
-                        {columns.map((info) => {
-                            return (
+      <table className="Table">
+        <thead>
+          <tr>
+            {/* get data from this */}
+            {columns.map((info) => {
+              return (
+                <th
+                  style={{
+                    borderBottom: "solid 3px red",
+                    color: "black",
+                    fontWeight: "bold",
+                    background: "white",
+                    padding: "10px",
+                  }}
+                >
+                  {info.Header}
+                </th>
+              );
+            })}
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* get data from data.js */}
+          {products.map((info) => {
+            return (
+              <tr>
+                <td>{info.product}</td>
+                <td>{info.trackingId}</td>
+                <td>{info.date}</td>
+                {/* chnage style by using status */}
+                <td>
+                  <span className="status" style={makeStyle(info.status)}>
+                    {info.status}
+                  </span>
+                </td>
+                <td className="Details">{info.details}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
 
-                                <th
-                                    style={{
-                                        borderBottom: 'solid 3px red',
-                                        color: 'black',
-                                        fontWeight: 'bold',
-                                        background: 'white',
-                                        padding: '10px'
-                                    }}
-                                >
-                                    {info.Header}</th>
-
-
-
-                            )
-                        })}
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* get data from data.js */}
-                    {tableData.map((info) => {
-                        return (
-                            <tr>
-                                <td>{info.col1}</td>
-                                <td>{info.col2}</td>
-                                <td>{info.col3}</td>
-                                {/* chnage style by using status */}
-                                <td><span className="status" style={makeStyle(info.col4)}>{info.col4}</span></td>
-                                <td className="Details">{info.col5}</td>
-
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
-
-        </div>
-    );
-}
+    </div>
+  );
+};
 export default Table;
